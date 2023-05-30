@@ -1,0 +1,50 @@
+---
+- name: docker-mailserver installation
+  hosts: vmserver
+  gather_facts: true  
+  become: yes
+  roles:
+    - role: hmlkao.docker_mailserver
+  vars:
+    mail_accounts:
+      - username: user1
+        domain: example.com
+        password: aaaaa
+        aliases:
+          - admin@example.com
+          - abuse@example.com
+        restrict: []
+      - username: no-reply
+        domain: example.com
+        password: bbbbb
+        aliases: []
+        restrict:
+          - receive
+    mail_domains:
+      - server1.example.com
+    mail_cert_email: my-mail@somewhere.com
+
+  pre_tasks:
+    - name: Install requirements          
+      become: yes      
+      register: aptinstall
+      apt:
+          name: 
+            - python3-pip 
+            - python3-cryptography        
+            - git
+          state: latest
+          update_cache: yes
+      
+    - name : validate the pip3 installation
+      debug: msg="Installation of pip3 is Successfull"
+      when: aptinstall is changed
+
+    - name: Version of pip
+      shell:
+        pip3 --version
+      register: versioninfo
+
+    - name: Validate if the installation is intact
+      assert:
+        that: "versioninfo is changed"
