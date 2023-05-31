@@ -1,28 +1,28 @@
 ---
 - name: docker-mailserver installation
-  hosts: vmserver
+  hosts: localhost
   gather_facts: true  
   become: yes
   roles:
     - role: hmlkao.docker_mailserver
   vars:
     mail_accounts:
-      - username: user1
-        domain: example.com
+      - username: admin
+        domain: mail.vieskov.com
         password: aaaaa
         aliases:
-          - admin@example.com
-          - abuse@example.com
+          - admin@mail.vieskov.com
+          - abuse@mail.vieskov.com
         restrict: []
       - username: no-reply
-        domain: example.com
+        domain: mail.vieskov.com
         password: bbbbb
         aliases: []
         restrict:
           - receive
     mail_domains:
-      - server1.example.com
-    mail_cert_email: my-mail@somewhere.com
+      - mail.vieskov.com
+    mail_cert_email: evveskov@gmail.com
 
   pre_tasks:
     - name: Install requirements          

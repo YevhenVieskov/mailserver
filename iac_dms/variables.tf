@@ -171,8 +171,6 @@ variable "wait_for_validation" {
 }
 
 
-
-
 /*variable "public_zone_id" {
   description = "public zone id"
   type        = string
@@ -190,6 +188,37 @@ variable "ssl_certificate_id" {
   description = "Certificate for load balancer"
   type        = string
   default     = "arn:aws:acm:us-east-2:052776272001:certificate/5f64bc59-ee3e-4202-86e0-0edbb6f0afe7"
+}
+
+
+#################
+# Ansible secret
+#################
+variable "ans_vault_pass" {
+  description = "Ansyble vault password "
+  type        = string  
+}
+
+#################
+# IAM Roles
+#################
+
+variable "trusted_role_arns_root" {
+  description = "Trusted role arns for root"
+  type        = string
+  default     =  "arn:aws:iam::012345678911:root"
+}
+
+variable "trusted_role_arns_user" {
+  description = "Trusted role arns for user"
+  type        = string
+  default     =  "arn:aws:iam::012345678911:user"
+}
+
+variable "aws_user_id" {
+  description = "Trusted role arns for user"
+  type        = string
+  default     =  "012345678911"
 }
 
 

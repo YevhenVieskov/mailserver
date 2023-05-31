@@ -42,11 +42,18 @@ docker-mailserver AWS deployment
 
 [Installing Mozilla SOPS Encryption Tool] (https://docs.technotim.live/posts/install-mozilla-sops/)
 
-[] ()
+[Retrieve secrets from AWS Secrets Manager] (https://stackoverflow.com/questions/61558884/retrieve-secrets-from-aws-secrets-manager)
+
+[justinclayton
+justinclayton/add-dns-record.sh
+] (https://gist.github.com/justinclayton/0a4df1c85e4aaf6dde52)
+
+[terraform conditional module with dependency] (https://stackoverflow.com/questions/68221788/terraform-conditional-module-with-dependency)
+
+[Terraform: If/Else Conditional Resource and Module Deployment] (https://build5nines.com/terraform-if-else-conditional-resource-and-module-deployment/)
 
 [] ()
 
 [] ()
 
 [] ()
-
