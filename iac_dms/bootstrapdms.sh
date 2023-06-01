@@ -61,17 +61,12 @@ cd /home/ubuntu/mailserver/ansible
 #You can find DKIM key in folder defined by mail_persist_folder variable in file config/opendkim/keys/<domain.tld>/mail.txt on your host (server)
 
 
+aws secretsmanager get-secret-value --secret-id secret-ansible-1  --query SecretString --output text > password_file
 
-aws secretsmanager list-secrets  --filter Key="name",Values="secret-ansible-1"
-
-aws secretsmanager get-secret-value --region us-west-2 --secret-id MySecret
-#aws secretsmanager get-secret-value --secret-id secrets --query SecretString --output text
-#echo "mypassword" > password_file
-#ansible-vault decrypt --vault-password-file password_file secret.yml
-#ansible playbook -u ubuntu docker_mailserver.yml
+ansible-vault decrypt --vault-password-file password_file secret.yml
+ansible-playbook -u ubuntu docker_mailserver.yml
 
 #create DKIM record in route53
-
 # https://gist.github.com/justinclayton/0a4df1c85e4aaf6dde52
 
 # aws route53 list-hosted-zones-by-name | jq '.HostedZones[] | select(.Name == "hoolicorp.com.") | .Id'
