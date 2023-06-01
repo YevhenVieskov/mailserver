@@ -3,11 +3,17 @@
 #set -x # Print expanded commands to stdout
 #https://github.com/docker-mailserver/docker-mailserver
 
-#sudo apt install -y git
+#install git
+sudo apt install -y git
 
-#sudo apt-get -y update
-#sudo apt-get -y install python3-pip
-#sudo apt-get -y install python3-cryptography
+sudo apt-get -y update
+sudo apt-get -y install python3-pip
+sudo apt-get -y install python3-cryptography
+
+#install zip
+sudo apt install -y zip
+sudo apt install -y unzip
+
 
 #install jq
 sudo apt install -y jq
@@ -41,7 +47,7 @@ sudo usermod -aG docker $USER  || true
 
 #install pip3, dependencies and docker-mailserver
 ansible-galaxy install hmlkao.docker_mailserver
-pip3 install ansible-vault
+#pip3 install ansible-vault pip3  not installed yet
 
 #install aws cli
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -56,9 +62,9 @@ cd /home/ubuntu/mailserver/ansible
 
 
 
-#aws secretsmanager list-secrets  --filter Key="name",Values="secret-ansible"
+aws secretsmanager list-secrets  --filter Key="name",Values="secret-ansible-1"
 
-#aws secretsmanager get-secret-value --region us-west-2 --secret-id MySecret
+aws secretsmanager get-secret-value --region us-west-2 --secret-id MySecret
 #aws secretsmanager get-secret-value --secret-id secrets --query SecretString --output text
 #echo "mypassword" > password_file
 #ansible-vault decrypt --vault-password-file password_file secret.yml

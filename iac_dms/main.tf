@@ -2,8 +2,8 @@
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "mailserver"
-
+  name                        = "mailserver"
+  ami                         = var.ami
   instance_type               = var.instance_type
   key_name                    = var.private_key_name
   vpc_security_group_ids      = [module.mailserversg.security_group_id]
@@ -39,12 +39,11 @@ module "secrets_manager_ansible" {
   source = "lgallard/secrets-manager/aws"
 
   secrets = {
-    secret-ansible = {
+    secret-ansible-1 = {
       description             = "ansible vault password"
-      recovery_window_in_days = 7
+      recovery_window_in_days = 0
       secret_string           = var.ans_vault_pass
     },
-
   }
 
   tags = var.tags

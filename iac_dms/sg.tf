@@ -35,35 +35,40 @@ module "mailserversg" {
     {
       from_port   = 25
       to_port     = 25
-      protocol    = "smtp"
+      description = "smtp"
+      protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     },
 
     {
       from_port   = 143
       to_port     = 143
-      protocol    = "imap4"
+      description = "imap4"
+      protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     },
 
     {
       from_port   = 465
       to_port     = 465
-      protocol    = "esmtp"
+      description = "esmtp"
+      protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     },
 
     {
       from_port   = 587
       to_port     = 587
-      protocol    = "esmtp"
+      description = "esmtp"
+      protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     },
 
     {
       from_port   = 993
       to_port     = 993
-      protocol    = "imap4"
+      description = "imap4"
+      protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     },
 

@@ -87,7 +87,7 @@ variable "instance_name" {
 variable "ami" {
   description = "Instance AMI"
   type        = string
-  default     = "ami-03f65b8614a860c29"
+  default     = "ami-03f65b8614a860c29" 
 }
 
 variable "private_key_name" {
@@ -99,7 +99,7 @@ variable "private_key_name" {
 variable "udata_file" {
   description = "Name to be used for the Jenkins master instance"
   type        = string
-  default     = "bootsrapdms.sh"
+  default     = "bootstrapdms.sh"
 }
 
 variable "private_key_path" {

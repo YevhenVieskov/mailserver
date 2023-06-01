@@ -9,7 +9,7 @@
                 "secretsmanager:DescribeSecret",
                 "secretsmanager:ListSecretVersionIds"
             ],
-            "Resource": "arn:aws:secretsmanager:region:id:secret:*"
+            "Resource": "*"
         },
         {
             "Effect": "Allow",
