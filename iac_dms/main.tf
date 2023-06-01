@@ -10,17 +10,18 @@ module "ec2_instance" {
   availability_zone           = "${var.region}a"
   subnet_id                   = element(module.vpc.public_subnets, 0)
   associate_public_ip_address = true
-  user_data                   = file(var.udata_path)
+  user_data                   = file("${path.module}/${var.udata_file}")
   create_iam_instance_profile = true
   iam_role_description        = "IAM role for EC2 instance"
   iam_role_policies = {
-    AdministratorAccess = "arn:aws:iam::aws:policy/AdministratorAccess"
+    ec2_sm      = module.iam_policy_sm.arn
+    ec2_route53 = module.iam_policy_route53.arn
   }
 
 
   tags = var.tags
 
-    depends_on = [module.secrets_manager_ansible.secret_arns]
+  depends_on = [module.secrets_manager_ansible.secret_arns]
 }
 
 resource "aws_eip" "mailserver-eip" {
@@ -41,9 +42,9 @@ module "secrets_manager_ansible" {
     secret-ansible = {
       description             = "ansible vault password"
       recovery_window_in_days = 7
-      secret_string           = var.secret_string
+      secret_string           = var.ans_vault_pass
     },
-    
+
   }
 
   tags = var.tags
@@ -51,27 +52,27 @@ module "secrets_manager_ansible" {
 
 
 module "iam_policy_sm" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  source = "terraform-aws-modules/iam/aws//modules/iam-policy"
 
-  name        = "example"
+  name        = "ec2_sm"
   path        = "/"
-  description = "Secret manager policy"
-  
-  policy = templatefile("./secret_manager_policy.tpl", { region = var.region, id = var.aws_user_id})
- 
-tags = var.tags
+  description = "Secret manager access from EC2 policy"
+
+  policy = templatefile("${path.module}/secret_manager_policy.tpl", { region = var.region, id = var.aws_user_id })
+
+  tags = var.tags
 
 }
 
 module "iam_policy_route53" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  source = "terraform-aws-modules/iam/aws//modules/iam-policy"
 
-  name        = "example"
+  name        = "ec2_route53"
   path        = "/"
-  description = "route53 policy"
-  
-  policy = templatefile("./route53_change_record_txt.tpl")
- 
-tags = var.tags
+  description = "route53 change record policy"
+
+  policy = templatefile("${path.module}/route53_change_record_txt.tpl", {})
+
+  tags = var.tags
 
 }

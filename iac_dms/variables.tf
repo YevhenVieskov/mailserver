@@ -96,10 +96,10 @@ variable "private_key_name" {
   default     = "key"
 }
 
-variable "udata_path" {
+variable "udata_file" {
   description = "Name to be used for the Jenkins master instance"
   type        = string
-  default     = "./bootsrapdms.sh"
+  default     = "bootsrapdms.sh"
 }
 
 variable "private_key_path" {
@@ -196,7 +196,7 @@ variable "ssl_certificate_id" {
 #################
 variable "ans_vault_pass" {
   description = "Ansyble vault password "
-  type        = string  
+  type        = string
 }
 
 #################
@@ -206,24 +206,27 @@ variable "ans_vault_pass" {
 variable "trusted_role_arns_root" {
   description = "Trusted role arns for root"
   type        = string
-  default     =  "arn:aws:iam::012345678911:root"
+  default     = "arn:aws:iam::012345678911:root"
 }
 
 variable "trusted_role_arns_user" {
   description = "Trusted role arns for user"
   type        = string
-  default     =  "arn:aws:iam::012345678911:user"
+  default     = "arn:aws:iam::012345678911:user"
 }
 
 variable "aws_user_id" {
   description = "Trusted role arns for user"
   type        = string
-  default     =  "012345678911"
+  default     = "012345678911"
 }
 
 
-
-
+variable "mailserver2" {
+  description = "Conditional variable for mailserver2"
+  type        = bool
+  default     = false
+}
 
 
 
