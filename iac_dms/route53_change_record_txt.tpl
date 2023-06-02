@@ -18,12 +18,10 @@
                "route53:List*",
                "route53:Get*"
             ],
-            "Resource": "arn:aws:route53:::hostedzone/*",
-            "Condition": {
-                "ForAllValues:StringEquals":{
-                     "route53:ChangeResourceRecordSetsRecordTypes": ["TXT"]
-                }
-            }
-          }
-        ]
+
+            "Resource": [
+                "*"
+            ]            
+        }
+    ]
 }

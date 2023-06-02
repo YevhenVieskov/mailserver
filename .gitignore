@@ -33,4 +33,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-ansible/docker_mailserver.yml
+ansible/vault-pass.txt
+dkimfile

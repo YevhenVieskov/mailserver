@@ -44,7 +44,7 @@ resource "aws_route53_record" "mail_record_spf" {
 
 resource "aws_route53_record" "mail_record_dmark" {
   zone_id         = aws_route53_zone.mail.zone_id
-  name            = ""
+  name            = "_dmark.${var.mail_zone_name}"
   type            = "TXT"
   ttl             = 300
   records         = [var.record_dmark]
