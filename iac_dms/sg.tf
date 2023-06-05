@@ -11,13 +11,13 @@ module "mailserversg" {
     {
       rule        = "http-80-tcp"
       description = "http"
-      cidr_blocks = module.vpc.vpc_cidr_block
+      cidr_blocks =  "0.0.0.0/0"    #module.vpc.vpc_cidr_block
     },
 
     {
       rule        = "https-443-tcp"
       description = "https"
-      cidr_blocks = module.vpc.vpc_cidr_block
+      cidr_blocks = "0.0.0.0/0"
     },
 
     {
