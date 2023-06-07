@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: localhost
+
+  roles:
+  - docker
+  - unblock-ports
+  - { role: certificates, when: not self_signed_certs }
+
+- hosts: localhost
+  become: true
+  vars:
+    db_password: mydbp7895432
+    user_password: postf7643219
+    self_signed_certs: false
+    use_stable_release: true
+    www_is_wordpress: false
+    use_opencart: false
+    use_poweradmin: false
+    opencart_user: opencart
+    vault_opencart_password: opr5605
+    opencart_from: admin@example.com
+    use_pritunl: false
+  roles:
+  - mailserver

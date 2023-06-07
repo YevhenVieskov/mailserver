@@ -143,7 +143,7 @@ aws route53 change-resource-record-sets \
   --hosted-zone-id $hz_id \
   --change-batch file://dkim.json
 
---change-batch file://dkim.json
+
 
 groupadd docker || true 
 usermod -aG docker $USER  || true 

@@ -30,27 +30,27 @@ docker-mailserver AWS deployment
 [Route 53 won't let me add to the existing SPF record for a client because the string is too long] (https://serverfault.com/questions/1012707/route-53-wont-let-me-add-to-the-existing-spf-record-for-a-client-because-the-st)
 
 [How do I activate reverse DNS functionality for Route 53 with a PTR record?
-4 minute read] (https://repost.aws/knowledge-center/route-53-reverse-dns)
+4 minute read](https://repost.aws/knowledge-center/route-53-reverse-dns)
 
-[Forwarding rules for reverse DNS queries in Resolver] (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-automatic-forwarding-rules-reverse-dns.html)
+[Forwarding rules for reverse DNS queries in Resolver](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-automatic-forwarding-rules-reverse-dns.html)
 
 [Elastic IP addresses] (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS)
 
-[Forwarding rules for reverse DNS queries in Resolver] (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-automatic-forwarding-rules-reverse-dns.html)
+[Forwarding rules for reverse DNS queries in Resolver](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-automatic-forwarding-rules-reverse-dns.html)
 
-[Importing your existing AWS Route53 records into Terraform ] (https://filip-prochazka.com/blog/importing-your-existing-aws-route53-records-into-terraform)
+[Importing your existing AWS Route53 records into Terraform ](https://filip-prochazka.com/blog/importing-your-existing-aws-route53-records-into-terraform)
 
-[Installing Mozilla SOPS Encryption Tool] (https://docs.technotim.live/posts/install-mozilla-sops/)
+[Installing Mozilla SOPS Encryption Tool](https://docs.technotim.live/posts/install-mozilla-sops/)
 
-[Retrieve secrets from AWS Secrets Manager] (https://stackoverflow.com/questions/61558884/retrieve-secrets-from-aws-secrets-manager)
+[Retrieve secrets from AWS Secrets Manager](https://stackoverflow.com/questions/61558884/retrieve-secrets-from-aws-secrets-manager)
 
 [justinclayton
 justinclayton/add-dns-record.sh
 ] (https://gist.github.com/justinclayton/0a4df1c85e4aaf6dde52)
 
-[terraform conditional module with dependency] (https://stackoverflow.com/questions/68221788/terraform-conditional-module-with-dependency)
+[terraform conditional module with dependency](https://stackoverflow.com/questions/68221788/terraform-conditional-module-with-dependency)
 
-[Terraform: If/Else Conditional Resource and Module Deployment] (https://build5nines.com/terraform-if-else-conditional-resource-and-module-deployment/)
+[Terraform: If/Else Conditional Resource and Module Deployment](https://build5nines.com/terraform-if-else-conditional-resource-and-module-deployment/)
 
 [] ()
 
