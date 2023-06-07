@@ -54,8 +54,8 @@ folder="/home/ubuntu"
 ans_dms_path=$folder/docker-mail-server
 
 #clone repo
-mkdir -p $folder/mailserver
-git https://github.com/mailserver2/mailserver.git $folder/mailserver2   
+mkdir -p $folder/mailserver2
+git clone https://github.com/mailserver2/mailserver.git $folder/mailserver2   
 
 #clone repo
 mkdir -p $folder/mailserver
@@ -68,12 +68,14 @@ aws secretsmanager get-secret-value --secret-id secret-ansible-1  --query Secret
 #decrypt playbook
 ansible-vault decrypt --vault-password-file ${folder}/mailserver/ansible/password_file ${folder}/mailserver/ansible/.env
 
-chgrp -R ubuntu:ubuntu ${folder}/mailserver
-chgrp -R ubuntu:ubuntu ${folder}/mailserver2
+chown -R ubuntu:ubuntu ${folder}/mailserver
+chown -R ubuntu:ubuntu ${folder}/mailserver2
 
 mv $folder/mailserver2/docker-compose.sample.yml  $folder/mailserver2/docker-compose.yml
 cp $folder/mailserver/ansible/.env $folder/mailserver2
 
+docker network create http_network
+docker network create mail_network
 docker-compose up -d
 
 groupadd docker || true 

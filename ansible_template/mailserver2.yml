@@ -21,5 +21,9 @@
     vault_opencart_password: opr5605
     opencart_from: admin@example.com
     use_pritunl: false
+    deploy_user_name: ubuntu    #username of server user 
+    domain_name: mail.example.com
+    rspamd_password: rspamdp 
+    pgp_encrypt_emails: mail@example.com
   roles:
   - mailserver

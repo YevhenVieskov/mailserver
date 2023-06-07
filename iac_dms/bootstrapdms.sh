@@ -75,7 +75,7 @@ ansible-galaxy install hmlkao.docker_mailserver  #not install
 #has no attribute 'stats'. 
 #second run skip failed task and run docker-mailserver
 
-chgrp -R ubuntu:ubuntu ${folder}/mailserver
+chown -R ubuntu:ubuntu ${folder}/mailserver
 
 ansible-playbook -u ubuntu ${folder}/mailserver/ansible/docker_mailserver.yml
 ansible-playbook -u ubuntu  ${folder}/mailserver/ansible/docker_mailserver.yml

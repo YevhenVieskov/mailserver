@@ -20,6 +20,10 @@ apt install -y unzip
 #install jq
 apt install -y jq
 
+#install file2ban
+apt install -y fail2ban 
+systemctl enable --now fail2ban
+
 #install ansible
 apt-add-repository -y ppa:ansible/ansible
 apt -y update
@@ -55,8 +59,15 @@ folder="/home/ubuntu"
 ans_dms_path=$folder/docker-mail-server
 
 #clone repo
+#change command docker-compose up -d on docker compose up -d in mailserver/task/main.yml for new version of docker compose
 mkdir -p $folder/mailserver
 git clone https://github.com/ksylvan/docker-mail-server.git  $ans_dms_path   
+
+
+
+#install ansible roles
+mkdir -p ~/.ansible/
+cp -r $ans_dms_path/roles ~/.ansible/
 
 #ansible-galaxy install l3d.mailserver_preperation
 
@@ -71,9 +82,23 @@ aws secretsmanager get-secret-value --secret-id secret-ansible-1  --query Secret
 #decrypt playbook
 ansible-vault decrypt --vault-password-file ${folder}/mailserver/ansible/password_file ${folder}/mailserver/ansible/mailserver2.yml
 
-ansible-galaxy install -r $folder/mailserver/ansible/requirements.yml
+#https://github.com/ansible/ansible/issues/16804
+#https://github.com/ansible/galaxy/issues/2948
+#ansible-galaxy install -r $folder/mailserver/ansible/requirements.yml --ignore-errors
 
-chgrp -R ubuntu:ubuntu ${folder}/mailserver
+#clone mailserver2 and copy docker-compose.yml to /usr/local/bin/
+#!!!!You must create .env file for docker-compose.yml
+git clone https://github.com/mailserver2/mailserver.git $folder/mailserver2  
+mv $folder/mailserver2/docker-compose.sample.yml  $folder/mailserver2/docker-compose.yml
+cp $folder/mailserver2/docker-compose.yml /usr/local/bin/
+cp $folder/mailserver/ansible/.env  /usr/local/bin/
+
+#network http_network declared as external, but could not be found -  error in compose file
+docker network create http_network
+docker network create mail_network
+
+
+chown -R ubuntu:ubuntu ${folder}/mailserver
 ansible-playbook -u ubuntu ${folder}/mailserver/ansible/mailserver2.yml
 
 
@@ -83,4 +108,9 @@ newgrp docker
 
 
 
+#TASK [mailserver : Install ufw-with-docker action for fail2ban] *****************************************
+#fatal: [localhost]: FAILED! => {"changed": false, "checksum": "0ee4075e6e9b136d490dc111cdcaccb03443d0a3", "msg": "Destination directory /etc/fail2ban/action.d does not exist"}
+
+#PLAY RECAP **********************************************************************************************
+#localhost                  : ok=26   changed=17   unreachable=0    failed=1    skipped=22   rescued=0    ignored=0   
 
