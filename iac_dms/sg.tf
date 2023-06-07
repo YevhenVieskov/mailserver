@@ -11,7 +11,7 @@ module "mailserversg" {
     {
       rule        = "http-80-tcp"
       description = "http"
-      cidr_blocks =  "0.0.0.0/0"    #module.vpc.vpc_cidr_block
+      cidr_blocks = "0.0.0.0/0" #module.vpc.vpc_cidr_block
     },
 
     {

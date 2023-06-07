@@ -2,7 +2,6 @@
 #set -e # Exit on first error
 set -x # Print expanded commands to stdout
 #https://github.com/mailserver2/mailserver
-#https://github.com/ksylvan/docker-mail-server
 
 
 #install git
@@ -56,9 +55,7 @@ ans_dms_path=$folder/docker-mail-server
 
 #clone repo
 mkdir -p $folder/mailserver
-git clone https://github.com/ksylvan/docker-mail-server.git  $ans_dms_path   
-
-#ansible-galaxy install l3d.mailserver_preperation
+git https://github.com/mailserver2/mailserver.git $folder/mailserver2   
 
 #clone repo
 mkdir -p $folder/mailserver
@@ -69,13 +66,15 @@ git clone https://github.com/YevhenVieskov/mailserver.git  $folder/mailserver
 aws secretsmanager get-secret-value --secret-id secret-ansible-1  --query SecretString --output text > "${folder}/mailserver/ansible/password_file"
 
 #decrypt playbook
-ansible-vault decrypt --vault-password-file ${folder}/mailserver/ansible/password_file ${folder}/mailserver/ansible/mailserver2.yml
-
-ansible-galaxy install -r $folder/mailserver/ansible/requirements.yml
+ansible-vault decrypt --vault-password-file ${folder}/mailserver/ansible/password_file ${folder}/mailserver/ansible/.env
 
 chgrp -R ubuntu:ubuntu ${folder}/mailserver
-ansible-playbook -u ubuntu ${folder}/mailserver/ansible/mailserver2.yml
+chgrp -R ubuntu:ubuntu ${folder}/mailserver2
 
+mv $folder/mailserver2/docker-compose.sample.yml  $folder/mailserver2/docker-compose.yml
+cp $folder/mailserver/ansible/.env $folder/mailserver2
+
+docker-compose up -d
 
 groupadd docker || true 
 usermod -aG docker $USER  || true 
